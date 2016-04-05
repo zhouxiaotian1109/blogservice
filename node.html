@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="zepto.js"></script>
+
+</head>
+<body>
+<p id="test">click me</p>
+
+<script type="text/javascript">
+Zepto(function($) {
+	
+	$("#test").on('click',function(){
+		var datas = {},
+			timeout = 30 * 1000;
+		var requestBody = {currentPage:1,searchKey:'002002'};
+		
+		datas.transCode='U0010001';
+		datas.requestBody = JSON.stringify(requestBody);
+		var beforeSend = function () {};
+
+        var error = function (result) {
+            alert('网络请求失败，请稍后重试。');
+        };
+        var complete = function () {};
+
+        // 
+
+		$.ajax({
+　　　　　　url:'http://localhost:3000/priest',
+　　　　　　type:'POST',
+			dataType: 'json',
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+　　　　　　data:datas,
+　　　　　　success:function(data){
+　　　　　　　　console.log(JSON.stringify(data));
+　　　　　　},
+			timeout: timeout,
+            error: error,
+            beforeSend: beforeSend,
+            complete: complete
+　　　　});
+	});
+	 
+ });
+</script>
+</body>
+</html>
